@@ -1,0 +1,139 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --gold: #C1A782;
+    --gold-dark: #A8905F;
+    --gold-light: #D4C4A8;
+    --ivory: #F5F0EB;
+    --rich: #050505;
+    --card: #0a0a0a;
+    --walnut: #2C2420;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+  }
+
+  body {
+    background: #000;
+    color: var(--ivory);
+    font-family: var(--font-jost), system-ui, sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background: var(--gold);
+    color: #000;
+  }
+
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #000;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(193, 167, 130, 0.2);
+    border-radius: 2px;
+  }
+
+  [dir='rtl'] body {
+    font-family: var(--font-arabic), Georgia, serif;
+  }
+}
+
+/* Grain texture overlay */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.022;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+@layer utilities {
+  .text-gradient-gold {
+    background: linear-gradient(135deg, #D4C4A8 0%, #C1A782 50%, #A8905F 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .gold-line {
+    width: 60px;
+    height: 1px;
+    background: rgba(193, 167, 130, 0.25);
+  }
+
+  .section-label {
+    font-size: 0.625rem;
+    letter-spacing: 0.5rem;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 300;
+    font-family: var(--font-jost), sans-serif;
+  }
+
+  .section-title {
+    font-family: var(--font-cormorant), Georgia, serif;
+    font-size: clamp(2.125rem, 4.5vw, 3.5rem);
+    font-weight: 300;
+    line-height: 1.12;
+  }
+
+  .btn-outline-gold {
+    display: inline-block;
+    padding: 16px 56px;
+    border: 1px solid rgba(193, 167, 130, 0.3);
+    color: var(--gold);
+    font-size: 0.625rem;
+    letter-spacing: 0.28rem;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    font-family: var(--font-jost), sans-serif;
+    font-weight: 400;
+  }
+
+  .btn-outline-gold:hover {
+    background: var(--gold);
+    color: #000;
+    transform: translateY(-2px);
+    box-shadow: 0 16px 48px rgba(193, 167, 130, 0.25);
+  }
+
+  .btn-solid-gold {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 17px 44px;
+    background: var(--gold);
+    color: #000;
+    font-size: 0.6875rem;
+    letter-spacing: 0.2rem;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.4s ease;
+    font-family: var(--font-jost), sans-serif;
+    font-weight: 400;
+    cursor: pointer;
+    border: none;
+  }
+
+  .btn-solid-gold:hover {
+    background: var(--gold-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 14px 44px rgba(193, 167, 130, 0.25);
+  }
+}
