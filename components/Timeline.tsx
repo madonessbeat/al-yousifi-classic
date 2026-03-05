@@ -64,8 +64,8 @@ export default function Timeline({ lang }: Props) {
         whileInView={{ scaleY: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 1.5, ease: [0.25, 0.46, 0.45, 0.94] }}
-        className="absolute left-1/2 top-0 bottom-0 w-px origin-top"
-        style={{ background: 'rgba(193,167,130,0.12)', transform: 'translateX(-50%)' }}
+        className="absolute left-1/2 top-0 bottom-0 w-px origin-top -translate-x-1/2"
+        style={{ background: 'rgba(193,167,130,0.12)' }}
       />
 
       <div className="flex flex-col gap-16">
