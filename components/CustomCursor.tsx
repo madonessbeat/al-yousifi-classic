@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useState } from 'react'
 import { motion, useMotionValue, useSpring } from 'framer-motion'
 
 export default function CustomCursor() {
@@ -8,10 +8,16 @@ export default function CustomCursor() {
   const cursorY = useMotionValue(-100)
   const ringX = useSpring(cursorX, { stiffness: 150, damping: 18 })
   const ringY = useSpring(cursorY, { stiffness: 150, damping: 18 })
+  const [isFinePonter, setIsFinePointer] = useState(false)
 
   useEffect(() => {
-    // Hide on touch devices
-    if (window.matchMedia('(pointer: coarse)').matches) return
+    const mq = window.matchMedia('(pointer: fine)')
+    setIsFinePointer(mq.matches)
+
+    const onChange = (e: MediaQueryListEvent) => setIsFinePointer(e.matches)
+    mq.addEventListener('change', onChange)
+
+    if (!mq.matches) return () => mq.removeEventListener('change', onChange)
 
     document.documentElement.style.cursor = 'none'
 
@@ -23,9 +29,12 @@ export default function CustomCursor() {
     window.addEventListener('mousemove', move)
     return () => {
       window.removeEventListener('mousemove', move)
+      mq.removeEventListener('change', onChange)
       document.documentElement.style.cursor = ''
     }
   }, [cursorX, cursorY])
+
+  if (!isFinePonter) return null
 
   return (
     <>
