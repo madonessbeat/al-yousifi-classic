@@ -82,7 +82,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       },
     ],
     priceRange: '$$$$',
-    image: '/og-image.jpg',
+    image: 'https://al-yousifi-classic.vercel.app/og-image.jpg',
   }
 
   return (
