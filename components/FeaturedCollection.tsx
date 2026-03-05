@@ -2,6 +2,7 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
+
 import { motion } from 'framer-motion'
 import SectionReveal from './SectionReveal'
 import { useLanguage } from '@/lib/LanguageContext'
@@ -17,7 +18,7 @@ export default function FeaturedCollection() {
 
           {/* Image */}
           <SectionReveal direction="left">
-            <div className="relative overflow-hidden group">
+            <Link href="/collections" className="relative overflow-hidden group block">
               <Image
                 src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=600&q=60"
                 alt="Featured Collection"
@@ -49,7 +50,21 @@ export default function FeaturedCollection() {
                   {featured.tag}
                 </span>
               </div>
-            </div>
+              {/* View collection hint */}
+              <div className="absolute inset-0 flex items-end justify-center pb-8 opacity-0 group-hover:opacity-100 transition-opacity duration-400 z-10">
+                <span
+                  className="text-[9px] tracking-[4px] uppercase font-jost px-5 py-2"
+                  style={{
+                    color: 'rgba(193,167,130,0.9)',
+                    background: 'rgba(0,0,0,0.65)',
+                    border: '1px solid rgba(193,167,130,0.2)',
+                    backdropFilter: 'blur(8px)',
+                  }}
+                >
+                  {featured.cta}
+                </span>
+              </div>
+            </Link>
           </SectionReveal>
 
           {/* Text */}

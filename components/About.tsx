@@ -28,8 +28,9 @@ export default function About() {
 
           {/* Image */}
           <SectionReveal direction="left">
-            <div
-              className="relative overflow-hidden group"
+            <Link
+              href="/about"
+              className="relative overflow-hidden group block"
               style={{ border: '1px solid rgba(193,167,130,0.06)' }}
             >
               <Image
@@ -52,7 +53,21 @@ export default function About() {
                 className="absolute bottom-0 left-0 right-0 h-px origin-left"
                 style={{ background: 'linear-gradient(90deg, transparent, rgba(193,167,130,0.4), transparent)' }}
               />
-            </div>
+              {/* Discover hint */}
+              <div className="absolute inset-0 flex items-end justify-center pb-8 opacity-0 group-hover:opacity-100 transition-opacity duration-400 z-10">
+                <span
+                  className="text-[9px] tracking-[4px] uppercase font-jost px-5 py-2"
+                  style={{
+                    color: 'rgba(193,167,130,0.9)',
+                    background: 'rgba(0,0,0,0.65)',
+                    border: '1px solid rgba(193,167,130,0.2)',
+                    backdropFilter: 'blur(8px)',
+                  }}
+                >
+                  {about.cta}
+                </span>
+              </div>
+            </Link>
           </SectionReveal>
 
           {/* Text */}

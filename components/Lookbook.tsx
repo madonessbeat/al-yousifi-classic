@@ -1,14 +1,18 @@
 'use client'
 
 import Image from 'next/image'
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import SectionReveal from './SectionReveal'
 import { useLanguage } from '@/lib/LanguageContext'
 import { LOOKBOOK_IMAGES } from '@/lib/i18n'
+import Lightbox from './Lightbox'
 
 export default function Lookbook() {
   const { t } = useLanguage()
   const { lookbook } = t
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
+  const images = LOOKBOOK_IMAGES.map(img => `https://images.unsplash.com/${img.id}?w=1200&q=80`)
 
   return (
     <section className="py-36 px-8 md:px-14 bg-black overflow-hidden">
@@ -44,7 +48,8 @@ export default function Lookbook() {
               <motion.div
                 whileHover={{ y: -3, scale: 1.005 }}
                 transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
-                className="relative overflow-hidden cursor-pointer group h-full"
+                onClick={() => setLightboxIndex(i)}
+                className="relative overflow-hidden cursor-zoom-in group h-full"
                 style={{
                   gridRow: img.span === 'tall' ? 'span 2' : 'span 1',
                   gridColumn: img.span === 'wide' ? 'span 2' : 'span 1',
@@ -73,6 +78,17 @@ export default function Lookbook() {
                   className="absolute inset-0 border border-transparent group-hover:border-gold/25 transition-all duration-400 pointer-events-none z-10"
                 />
 
+                {/* Expand icon on hover */}
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+                  <div
+                    className="w-9 h-9 flex items-center justify-center"
+                    style={{ border: '1px solid rgba(193,167,130,0.4)', background: 'rgba(0,0,0,0.5)' }}
+                  >
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(193,167,130,0.9)" strokeWidth="1.5">
+                      <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                    </svg>
+                  </div>
+                </div>
                 {/* Number tag */}
                 <div className="absolute bottom-4 left-4 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-400">
                   <span className="text-[9px] tracking-[2px] text-gold/60 font-jost">
@@ -84,6 +100,16 @@ export default function Lookbook() {
           ))}
         </div>
       </div>
+
+      {lightboxIndex !== null && (
+        <Lightbox
+          images={images}
+          index={lightboxIndex}
+          onClose={() => setLightboxIndex(null)}
+          onPrev={() => setLightboxIndex(i => (i! - 1 + images.length) % images.length)}
+          onNext={() => setLightboxIndex(i => (i! + 1) % images.length)}
+        />
+      )}
     </section>
   )
 }
