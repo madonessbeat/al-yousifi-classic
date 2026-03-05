@@ -56,6 +56,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="theme-color" content="#000000" />
       </head>
       <body>
+        <a href="#main-content" className="skip-to-content">Skip to content</a>
         <CustomCursor />
         <LanguageProvider>
           <Navbar />
