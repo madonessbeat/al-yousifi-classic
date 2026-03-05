@@ -1,9 +1,10 @@
 'use client'
 
 import Link from 'next/link'
-import { motion } from 'framer-motion'
+import { motion, useScroll, useTransform } from 'framer-motion'
 import { useLanguage } from '@/lib/LanguageContext'
-import AYCLogo, { StrokeWatermark } from './AYCLogo'
+import { StrokeWatermark } from './AYCLogo'
+import HeroCanvas from './HeroCanvas'
 import MagneticButton from './MagneticButton'
 
 const fadeUp = (delay: number) => ({
@@ -14,13 +15,19 @@ const fadeUp = (delay: number) => ({
 
 export default function Hero() {
   const { t } = useLanguage()
+  const { scrollY } = useScroll()
+  const logoY = useTransform(scrollY, [0, 600], [0, -120])
+  const textY = useTransform(scrollY, [0, 600], [0, -60])
 
   return (
     <section className="relative h-screen flex flex-col items-center justify-center text-center overflow-hidden bg-black">
 
-      {/* ── Layer 1: Stroke logo — large architectural watermark ── */}
+      {/* Layer 0: Particle canvas */}
+      <HeroCanvas />
+
+      {/* Layer 1: Stroke watermark */}
       <StrokeWatermark
-        opacity={0.035}
+        opacity={0.03}
         className="inset-0 flex items-center justify-center"
         style={{
           top: '50%',
@@ -31,30 +38,26 @@ export default function Hero() {
         }}
       />
 
-      {/* ── Layer 2: Radial gold ambient glow ── */}
+      {/* Layer 2: Radial glow — breathing */}
       <div
-        className="absolute inset-0 z-[1] pointer-events-none"
+        className="absolute inset-0 z-[2] pointer-events-none animate-glow-pulse"
         style={{
-          background:
-            'radial-gradient(ellipse 70% 60% at 50% 48%, rgba(193,167,130,0.07) 0%, transparent 65%)',
+          background: 'radial-gradient(ellipse 70% 60% at 50% 48%, rgba(193,167,130,0.09) 0%, transparent 65%)',
         }}
       />
 
-      {/* ── Layer 3: Bottom fade to black ── */}
+      {/* Layer 3: Bottom fade */}
       <div
-        className="absolute bottom-0 left-0 right-0 h-48 z-[2] pointer-events-none"
-        style={{
-          background: 'linear-gradient(to top, #000 0%, transparent 100%)',
-        }}
+        className="absolute bottom-0 left-0 right-0 h-48 z-[3] pointer-events-none"
+        style={{ background: 'linear-gradient(to top, #000 0%, transparent 100%)' }}
       />
 
-      {/* ── Content ── */}
+      {/* Content */}
       <div className="relative z-10 flex flex-col items-center px-6">
 
-        {/* Bold logo — hero feature display */}
-        <motion.div {...fadeUp(0.5)} className="mb-7">
+        {/* Logo with scroll parallax */}
+        <motion.div {...fadeUp(0.5)} style={{ y: logoY }} className="mb-7">
           <div className="relative">
-            {/* Ambient glow ring */}
             <div
               className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
               style={{
@@ -63,10 +66,9 @@ export default function Hero() {
                 background: 'radial-gradient(ellipse, rgba(193,167,130,0.08) 0%, transparent 65%)',
               }}
             />
-            <AYCLogo
-              variant="standard"
-              color="gold"
-              glow
+            <img
+              src="/logo.svg"
+              alt="Al-Yousifi Classic | اليوسفي كلاسيك"
               style={{
                 width: 'min(420px, 68vw)',
                 height: 'auto',
@@ -84,31 +86,31 @@ export default function Hero() {
           <div className="w-10 h-px" style={{ background: 'rgba(193,167,130,0.3)' }} />
         </motion.div>
 
-        {/* Tagline */}
-        <motion.p
-          {...fadeUp(1.0)}
-          className="font-cormorant italic text-gold tracking-[4px] mb-3"
-          style={{ fontSize: 'clamp(15px, 2vw, 21px)' }}
-        >
-          {t.hero.tagline}
-        </motion.p>
+        {/* Text with scroll parallax */}
+        <motion.div style={{ y: textY }} className="flex flex-col items-center">
+          <motion.p
+            {...fadeUp(1.0)}
+            className="font-cormorant italic text-gold tracking-[4px] mb-3"
+            style={{ fontSize: 'clamp(15px, 2vw, 21px)' }}
+          >
+            {t.hero.tagline}
+          </motion.p>
 
-        {/* Sub */}
-        <motion.p
-          {...fadeUp(1.25)}
-          className="font-arabic text-[15px] text-gold/40 mb-12 tracking-wide"
-          dir="auto"
-        >
-          {t.hero.sub}
-        </motion.p>
+          <motion.p
+            {...fadeUp(1.25)}
+            className="font-arabic text-[15px] text-gold/40 mb-12 tracking-wide"
+            dir="auto"
+          >
+            {t.hero.sub}
+          </motion.p>
 
-        {/* CTA */}
-        <motion.div {...fadeUp(1.5)}>
-          <MagneticButton>
-            <Link href="/collections" className="btn-outline-gold">
-              {t.hero.cta}
-            </Link>
-          </MagneticButton>
+          <motion.div {...fadeUp(1.5)}>
+            <MagneticButton>
+              <Link href="/collections" className="btn-outline-gold">
+                {t.hero.cta}
+              </Link>
+            </MagneticButton>
+          </motion.div>
         </motion.div>
       </div>
 
