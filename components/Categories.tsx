@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import SectionReveal from './SectionReveal'
+import TiltCard from './TiltCard'
 import { useLanguage } from '@/lib/LanguageContext'
 import { CATEGORIES } from '@/lib/i18n'
 
@@ -31,8 +32,8 @@ export default function Categories() {
         {CATEGORIES.map((cat, i) => (
           <SectionReveal key={cat.id} delay={i * 0.08}>
             <Link href={`/categories#${cat.id}`}>
+              <TiltCard>
               <motion.div
-                whileHover={{ y: -4 }}
                 transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
                 className="relative overflow-hidden cursor-pointer group"
                 style={{ aspectRatio: '3/4' }}
@@ -85,6 +86,7 @@ export default function Categories() {
                   {categories.explore}
                 </div>
               </motion.div>
+              </TiltCard>
             </Link>
           </SectionReveal>
         ))}

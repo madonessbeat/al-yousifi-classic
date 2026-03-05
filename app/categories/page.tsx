@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 import SectionReveal from '@/components/SectionReveal'
+import TiltCard from '@/components/TiltCard'
 import { useLanguage } from '@/lib/LanguageContext'
 import { CATEGORIES } from '@/lib/i18n'
 
@@ -47,9 +48,9 @@ export default function CategoriesPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {CATEGORIES.map((cat, i) => (
               <SectionReveal key={cat.id} delay={i * 0.1}>
+                <TiltCard>
                 <motion.div
                   id={cat.id}
-                  whileHover={{ y: -4 }}
                   transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
                   className="group relative overflow-hidden cursor-pointer"
                   style={{ aspectRatio: '3/4' }}
@@ -91,6 +92,7 @@ export default function CategoriesPage() {
                     />
                   </div>
                 </motion.div>
+                </TiltCard>
               </SectionReveal>
             ))}
           </div>
