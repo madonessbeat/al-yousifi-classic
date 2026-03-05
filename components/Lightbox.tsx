@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 interface LightboxProps {
@@ -12,6 +12,9 @@ interface LightboxProps {
 }
 
 export default function Lightbox({ images, index, onClose, onPrev, onNext }: LightboxProps) {
+  const dialogRef = useRef<HTMLDivElement>(null)
+
+  // Keyboard navigation + body scroll lock
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose()
@@ -26,10 +29,63 @@ export default function Lightbox({ images, index, onClose, onPrev, onNext }: Lig
     }
   }, [onClose, onPrev, onNext])
 
+  // Tab trap
+  useEffect(() => {
+    const previouslyFocused = document.activeElement as HTMLElement | null
+
+    const dialog = dialogRef.current
+    if (!dialog) return
+
+    const focusableSelectors = [
+      'button:not([disabled])',
+      '[href]',
+      'input:not([disabled])',
+      'select:not([disabled])',
+      'textarea:not([disabled])',
+      '[tabindex]:not([tabindex="-1"])',
+    ].join(', ')
+
+    const getFocusable = () =>
+      Array.from(dialog.querySelectorAll<HTMLElement>(focusableSelectors))
+
+    // Focus the first focusable element
+    const focusable = getFocusable()
+    if (focusable.length > 0) focusable[0].focus()
+
+    const handleTab = (e: KeyboardEvent) => {
+      if (e.key !== 'Tab') return
+      const elements = getFocusable()
+      if (elements.length === 0) return
+      const first = elements[0]
+      const last = elements[elements.length - 1]
+      if (e.shiftKey) {
+        if (document.activeElement === first) {
+          e.preventDefault()
+          last.focus()
+        }
+      } else {
+        if (document.activeElement === last) {
+          e.preventDefault()
+          first.focus()
+        }
+      }
+    }
+
+    document.addEventListener('keydown', handleTab)
+    return () => {
+      document.removeEventListener('keydown', handleTab)
+      previouslyFocused?.focus()
+    }
+  }, [])
+
   return (
     <AnimatePresence>
       <motion.div
+        ref={dialogRef}
         key="backdrop"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Image lightbox"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
@@ -42,7 +98,7 @@ export default function Lightbox({ images, index, onClose, onPrev, onNext }: Lig
         <button
           onClick={onClose}
           className="absolute top-6 right-7 text-gold/50 hover:text-gold text-2xl font-light leading-none transition-colors z-10"
-          aria-label="Close"
+          aria-label="Close lightbox"
         >
           ✕
         </button>
@@ -86,7 +142,7 @@ export default function Lightbox({ images, index, onClose, onPrev, onNext }: Lig
           <button
             onClick={e => { e.stopPropagation(); onPrev() }}
             className="absolute left-5 md:left-10 text-gold/40 hover:text-gold transition-colors z-10 p-3"
-            aria-label="Previous"
+            aria-label="Previous image"
           >
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2">
               <polyline points="15 18 9 12 15 6" />
@@ -122,7 +178,7 @@ export default function Lightbox({ images, index, onClose, onPrev, onNext }: Lig
           <button
             onClick={e => { e.stopPropagation(); onNext() }}
             className="absolute right-5 md:right-10 text-gold/40 hover:text-gold transition-colors z-10 p-3"
-            aria-label="Next"
+            aria-label="Next image"
           >
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2">
               <polyline points="9 18 15 12 9 6" />

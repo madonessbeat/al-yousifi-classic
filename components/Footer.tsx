@@ -66,7 +66,7 @@ export default function Footer() {
             </Link>
 
             <p
-              className="text-[13px] text-ivory/22 leading-[1.9] max-w-[280px] font-light"
+              className="text-[13px] text-ivory/35 leading-[1.9] max-w-[280px] font-light"
               dir="auto"
             >
               {footer.tagline}
@@ -113,7 +113,7 @@ export default function Footer() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-[13px] text-ivory/28 hover:text-gold transition-colors duration-300 font-light leading-none"
+                  className="text-[13px] text-ivory/40 hover:text-gold transition-colors duration-300 font-light leading-none"
                 >
                   {link.label}
                 </Link>
@@ -133,12 +133,12 @@ export default function Footer() {
                   href={link.href}
                   target={link.href.startsWith('http') ? '_blank' : undefined}
                   rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                  className="text-[13px] text-ivory/28 hover:text-gold transition-colors duration-300 font-light leading-none"
+                  className="text-[13px] text-ivory/40 hover:text-gold transition-colors duration-300 font-light leading-none"
                 >
                   {link.label}
                 </a>
               ))}
-              <p className="text-[13px] text-ivory/20 leading-[1.7] font-light mt-1" dir="auto">
+              <p className="text-[13px] text-ivory/35 leading-[1.7] font-light mt-1" dir="auto">
                 شارع الكلاكلة<br />الخرطوم، السودان
               </p>
             </div>
@@ -150,10 +150,10 @@ export default function Footer() {
           className="mt-14 pt-6 flex flex-col sm:flex-row justify-between items-center gap-3 flex-wrap"
           style={{ borderTop: '1px solid rgba(193,167,130,0.05)' }}
         >
-          <p className="text-[10px] text-ivory/12 font-jost" dir="auto">
+          <p className="text-[10px] text-ivory/25 font-jost" dir="auto">
             {footer.copyright}
           </p>
-          <p className="text-[10px] text-ivory/12 font-jost">
+          <p className="text-[10px] text-ivory/25 font-jost">
             {footer.madeIn}
           </p>
         </div>

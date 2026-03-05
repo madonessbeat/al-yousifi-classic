@@ -101,7 +101,9 @@ export default function Navbar() {
           <button
             className="lg:hidden flex flex-col gap-[5px] p-2 cursor-pointer"
             onClick={() => setMobileOpen(o => !o)}
-            aria-label="Toggle menu"
+            aria-label="Toggle navigation menu"
+            aria-expanded={mobileOpen}
+            aria-controls="mobile-menu"
           >
             {mobileOpen ? (
               <span className="block text-gold text-lg leading-none font-light">✕</span>
@@ -123,6 +125,7 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -6 }}
             transition={{ duration: 0.22, ease: [0.25, 0.46, 0.45, 0.94] }}
+            id="mobile-menu"
             className="fixed left-0 right-0 z-40 lg:hidden"
             style={{
               top: scrolled ? '60px' : '80px',
