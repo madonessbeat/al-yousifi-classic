@@ -7,6 +7,7 @@ import Footer from '@/components/Footer'
 import WhatsAppButton from '@/components/WhatsAppButton'
 import InstallPrompt from '@/components/InstallPrompt'
 import CustomCursor from '@/components/CustomCursor'
+import PageTransition from '@/components/PageTransition'
 
 const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
@@ -58,7 +59,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <CustomCursor />
         <LanguageProvider>
           <Navbar />
-          <main>{children}</main>
+          <PageTransition>
+            <main id="main-content">{children}</main>
+          </PageTransition>
           <Footer />
           <WhatsAppButton />
           <InstallPrompt />
