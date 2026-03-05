@@ -63,7 +63,7 @@ export default function Hero() {
               }}
             />
             <AYCLogo
-              variant="bold"
+              variant="standard"
               color="gold"
               glow
               style={{

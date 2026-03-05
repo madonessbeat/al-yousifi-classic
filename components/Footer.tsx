@@ -54,7 +54,7 @@ export default function Footer() {
               */}
               <AYCLogo
                 variant="lockup"
-                color="gold"
+                color="raw"
                 style={{
                   height: '44px',
                   width: 'auto',

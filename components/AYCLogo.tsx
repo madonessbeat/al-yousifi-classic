@@ -36,7 +36,7 @@ const LOGO_SRC: Record<LogoVariant, string> = {
 const COLOR_FILTER: Record<LogoColor, string> = {
   gold:  'brightness(0) invert(1) sepia(1)',
   white: 'brightness(0) invert(1)',
-  raw:   'none',
+  raw:   'invert(1)',
 }
 
 export default function AYCLogo({
