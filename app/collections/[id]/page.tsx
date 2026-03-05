@@ -9,6 +9,7 @@ import { COLLECTIONS_EXTENDED } from '@/lib/collections'
 import SectionReveal from '@/components/SectionReveal'
 import Lightbox from '@/components/Lightbox'
 import MagneticButton from '@/components/MagneticButton'
+import { BLUR_GOLD } from '@/lib/blur-placeholder'
 
 export default function CollectionDetailPage({ params }: { params: { id: string } }) {
   const { lang } = useLanguage()
@@ -32,6 +33,8 @@ export default function CollectionDetailPage({ params }: { params: { id: string 
             sizes="100vw"
             className="object-cover"
             style={{ filter: 'brightness(0.3) saturate(0.7)' }}
+            placeholder="blur"
+            blurDataURL={BLUR_GOLD}
           />
         </div>
         <div
@@ -142,6 +145,8 @@ export default function CollectionDetailPage({ params }: { params: { id: string 
                     sizes="(max-width: 768px) 50vw, 33vw"
                     className="object-cover transition-transform duration-700 group-hover:scale-[1.06]"
                     style={{ filter: 'brightness(0.75) saturate(0.8)' }}
+                    placeholder="blur"
+                    blurDataURL={BLUR_GOLD}
                   />
                   <div className="absolute inset-0 border border-transparent group-hover:border-gold/20 transition-all duration-400" />
                   <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">

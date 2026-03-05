@@ -6,6 +6,7 @@ import SplitText from '@/components/SplitText'
 import AnimatedCounter from '@/components/AnimatedCounter'
 import Timeline from '@/components/Timeline'
 import { useLanguage } from '@/lib/LanguageContext'
+import { BLUR_GOLD } from '@/lib/blur-placeholder'
 
 const VALUES = [
   {
@@ -52,6 +53,8 @@ export default function AboutPage() {
             sizes="100vw"
             className="object-cover"
             style={{ filter: 'brightness(0.2) saturate(0.6)' }}
+            placeholder="blur"
+            blurDataURL={BLUR_GOLD}
           />
         </div>
         <div

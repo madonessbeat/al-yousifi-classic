@@ -7,6 +7,7 @@ import SectionReveal from '@/components/SectionReveal'
 import Lightbox from '@/components/Lightbox'
 import { useLanguage } from '@/lib/LanguageContext'
 import { LOOKBOOK_IMAGES } from '@/lib/i18n'
+import { BLUR_GOLD } from '@/lib/blur-placeholder'
 
 const EXTRA_IMAGES = [
   'photo-1548142813-c348350df52b',
@@ -36,6 +37,8 @@ export default function LookbookPage() {
             sizes="100vw"
             className="object-cover"
             style={{ filter: 'brightness(0.2) saturate(0.5)' }}
+            placeholder="blur"
+            blurDataURL={BLUR_GOLD}
           />
         </div>
         <div
@@ -78,6 +81,8 @@ export default function LookbookPage() {
                     className="object-cover transition-all duration-700 group-hover:scale-[1.07]"
                     style={{ filter: 'brightness(0.72) saturate(0.8)' }}
                     loading="lazy"
+                    placeholder="blur"
+                    blurDataURL={BLUR_GOLD}
                   />
                   <div className="absolute inset-0 border border-transparent group-hover:border-gold/20 transition-all duration-400 z-10" />
                   <div className="absolute bottom-3 right-3 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-400">

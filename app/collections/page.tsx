@@ -6,6 +6,7 @@ import { motion } from 'framer-motion'
 import { useLanguage } from '@/lib/LanguageContext'
 import { COLLECTIONS_EXTENDED } from '@/lib/collections'
 import HorizontalScroll from '@/components/HorizontalScroll'
+import { BLUR_GOLD } from '@/lib/blur-placeholder'
 
 export default function CollectionsPage() {
   const { t, lang } = useLanguage()
@@ -23,6 +24,8 @@ export default function CollectionsPage() {
             sizes="100vw"
             className="object-cover"
             style={{ filter: 'brightness(0.2) saturate(0.5)' }}
+            placeholder="blur"
+            blurDataURL={BLUR_GOLD}
           />
         </div>
         <div
@@ -61,6 +64,8 @@ export default function CollectionsPage() {
                   sizes="420px"
                   className="object-cover transition-transform duration-[700ms] group-hover:scale-[1.05]"
                   style={{ filter: 'brightness(0.55) saturate(0.8)' }}
+                  placeholder="blur"
+                  blurDataURL={BLUR_GOLD}
                 />
                 <div
                   className="absolute inset-0"

@@ -7,6 +7,7 @@ import SectionReveal from '@/components/SectionReveal'
 import TiltCard from '@/components/TiltCard'
 import { useLanguage } from '@/lib/LanguageContext'
 import { CATEGORIES } from '@/lib/i18n'
+import { BLUR_GOLD } from '@/lib/blur-placeholder'
 
 const FILTER_TABS = {
   ar: ['الكل', 'الرسمي', 'الكاجوال', 'الأحذية', 'الساعات', 'الإكسسوار'],
@@ -37,6 +38,8 @@ export default function CategoriesPage() {
             sizes="100vw"
             className="object-cover"
             style={{ filter: 'brightness(0.2) saturate(0.5)' }}
+            placeholder="blur"
+            blurDataURL={BLUR_GOLD}
           />
         </div>
         <div
@@ -116,6 +119,8 @@ export default function CategoriesPage() {
                         sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                         className="object-cover transition-all duration-[800ms] group-hover:scale-[1.06]"
                         style={{ filter: 'brightness(0.55) saturate(0.8)' }}
+                        placeholder="blur"
+                        blurDataURL={BLUR_GOLD}
                       />
                       <div
                         className="absolute inset-0"

@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Image from 'next/image'
 import SectionReveal from '@/components/SectionReveal'
 import { useLanguage } from '@/lib/LanguageContext'
+import { BLUR_GOLD } from '@/lib/blur-placeholder'
 
 const PHONE = '249912302693'
 
@@ -37,6 +38,8 @@ export default function ContactPage() {
             sizes="100vw"
             className="object-cover"
             style={{ filter: 'brightness(0.18) saturate(0.4)' }}
+            placeholder="blur"
+            blurDataURL={BLUR_GOLD}
           />
         </div>
         <div

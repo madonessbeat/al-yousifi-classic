@@ -7,6 +7,7 @@ import SectionReveal from './SectionReveal'
 import TiltCard from './TiltCard'
 import { useLanguage } from '@/lib/LanguageContext'
 import { CATEGORIES } from '@/lib/i18n'
+import { BLUR_GOLD } from '@/lib/blur-placeholder'
 
 export default function Categories() {
   const { t, lang } = useLanguage()
@@ -46,6 +47,8 @@ export default function Categories() {
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   className="object-cover transition-all duration-[800ms] ease-out group-hover:scale-[1.07]"
                   style={{ filter: 'brightness(0.55) saturate(0.8)' }}
+                  placeholder="blur"
+                  blurDataURL={BLUR_GOLD}
                 />
 
                 {/* Hover overlay */}

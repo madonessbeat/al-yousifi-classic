@@ -7,6 +7,7 @@ import { motion } from 'framer-motion'
 import SectionReveal from './SectionReveal'
 import { useLanguage } from '@/lib/LanguageContext'
 import MagneticButton from './MagneticButton'
+import { BLUR_GOLD } from '@/lib/blur-placeholder'
 
 export default function FeaturedCollection() {
   const { t } = useLanguage()
@@ -30,6 +31,8 @@ export default function FeaturedCollection() {
                   aspectRatio: '4/5',
                   filter: 'brightness(0.65) saturate(0.85)',
                 }}
+                placeholder="blur"
+                blurDataURL={BLUR_GOLD}
               />
               <div
                 className="absolute inset-0 pointer-events-none"

@@ -9,6 +9,7 @@ import { LogoWatermark } from './AYCLogo'
 import AnimatedCounter from './AnimatedCounter'
 import MagneticButton from './MagneticButton'
 import BrandMarquee from './BrandMarquee'
+import { BLUR_GOLD } from '@/lib/blur-placeholder'
 
 export default function About() {
   const { t } = useLanguage()
@@ -43,6 +44,8 @@ export default function About() {
                 height={800}
                 className="w-full object-cover transition-transform duration-[6000ms] ease-out group-hover:scale-[1.04]"
                 style={{ aspectRatio: '3/4', filter: 'brightness(0.75) saturate(0.9)' }}
+                placeholder="blur"
+                blurDataURL={BLUR_GOLD}
               />
               <div
                 className="absolute inset-0 pointer-events-none"

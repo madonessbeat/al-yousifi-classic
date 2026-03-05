@@ -4,6 +4,7 @@ import Image from 'next/image'
 import SectionReveal from './SectionReveal'
 import { useLanguage } from '@/lib/LanguageContext'
 import MagneticButton from './MagneticButton'
+import { BLUR_GOLD } from '@/lib/blur-placeholder'
 
 const PHONE = '249912302693'
 
@@ -42,6 +43,8 @@ export default function ContactSection() {
                   aspectRatio: '1',
                   filter: 'brightness(0.3) saturate(0.5)',
                 }}
+                placeholder="blur"
+                blurDataURL={BLUR_GOLD}
               />
 
               {/* Pulsing pin */}

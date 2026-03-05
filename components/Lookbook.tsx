@@ -7,6 +7,7 @@ import SectionReveal from './SectionReveal'
 import { useLanguage } from '@/lib/LanguageContext'
 import { LOOKBOOK_IMAGES } from '@/lib/i18n'
 import Lightbox from './Lightbox'
+import { BLUR_GOLD } from '@/lib/blur-placeholder'
 
 export default function Lookbook() {
   const { t } = useLanguage()
@@ -65,6 +66,8 @@ export default function Lookbook() {
                   style={{
                     filter: 'brightness(0.7) saturate(0.8)',
                   }}
+                  placeholder="blur"
+                  blurDataURL={BLUR_GOLD}
                 />
 
                 {/* Hover overlay */}
