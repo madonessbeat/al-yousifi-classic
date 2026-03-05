@@ -6,6 +6,7 @@ import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import WhatsAppButton from '@/components/WhatsAppButton'
 import InstallPrompt from '@/components/InstallPrompt'
+import CustomCursor from '@/components/CustomCursor'
 
 const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
@@ -54,6 +55,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="theme-color" content="#000000" />
       </head>
       <body>
+        <CustomCursor />
         <LanguageProvider>
           <Navbar />
           <main>{children}</main>
