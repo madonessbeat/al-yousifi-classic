@@ -85,7 +85,7 @@ export default function About() {
               <div className="gold-line my-7" />
             </SectionReveal>
             <SectionReveal delay={0.35}>
-              <p className="text-[15px] leading-[2] text-ivory/55 max-w-[540px] font-light" dir="auto">
+              <p className="text-[16px] leading-[2] text-ivory/55 max-w-[540px] font-light" dir="auto">
                 {about.body}
               </p>
             </SectionReveal>

@@ -88,7 +88,7 @@ export default function Craftsmanship() {
                 >
                   {pillar.title}
                 </h3>
-                <p className="text-[14px] leading-[1.9] text-ivory/45 font-light" dir="auto">
+                <p className="text-[15px] leading-[1.9] text-ivory/45 font-light" dir="auto">
                   {pillar.body}
                 </p>
               </motion.div>

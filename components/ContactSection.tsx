@@ -102,7 +102,7 @@ export default function ContactSection() {
                       {info.label}
                     </p>
                     <p
-                      className="text-[14px] text-ivory/55 leading-[1.7] whitespace-pre-line"
+                      className="text-[15px] text-ivory/55 leading-[1.7] whitespace-pre-line"
                       dir="auto"
                     >
                       {info.value}

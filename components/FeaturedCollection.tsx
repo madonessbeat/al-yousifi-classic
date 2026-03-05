@@ -94,7 +94,7 @@ export default function FeaturedCollection() {
 
             <SectionReveal delay={0.4}>
               <p
-                className="text-[15px] leading-[2] text-ivory/55 max-w-[480px] font-light"
+                className="text-[16px] leading-[2] text-ivory/55 max-w-[480px] font-light"
                 dir="auto"
               >
                 {featured.body}
@@ -113,7 +113,7 @@ export default function FeaturedCollection() {
                     <p className="text-[9px] tracking-[3px] uppercase text-gold mb-1.5 font-jost">
                       {d.label}
                     </p>
-                    <p className="text-[13px] text-ivory/45 leading-relaxed">
+                    <p className="text-[14px] text-ivory/45 leading-relaxed">
                       {d.value}
                     </p>
                   </div>
