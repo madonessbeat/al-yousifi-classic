@@ -6,6 +6,7 @@ import { motion } from 'framer-motion'
 import SectionReveal from './SectionReveal'
 import { useLanguage } from '@/lib/LanguageContext'
 import { LogoWatermark } from './AYCLogo'
+import AnimatedCounter from './AnimatedCounter'
 
 export default function About() {
   const { t } = useLanguage()
@@ -95,9 +96,10 @@ export default function About() {
               <div className="flex gap-10 mt-12 flex-wrap">
                 {[about.stat1, about.stat2, about.stat3].map((stat, i) => (
                   <div key={i}>
-                    <p className="font-cormorant text-[40px] text-gold font-light leading-none mb-1">
-                      {stat.value}
-                    </p>
+                    <AnimatedCounter
+                      value={stat.value}
+                      className="font-cormorant text-[40px] text-gold font-light leading-none mb-1 block"
+                    />
                     <p className="text-[10px] tracking-[2px] uppercase text-ivory/25 font-jost">
                       {stat.label}
                     </p>

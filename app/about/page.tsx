@@ -2,6 +2,7 @@
 
 import Image from 'next/image'
 import SectionReveal from '@/components/SectionReveal'
+import AnimatedCounter from '@/components/AnimatedCounter'
 import { useLanguage } from '@/lib/LanguageContext'
 
 export default function AboutPage() {
@@ -79,9 +80,7 @@ export default function AboutPage() {
                     borderBottom: i < 2 ? '1px solid rgba(193,167,130,0.07)' : 'none',
                   }}
                 >
-                  <p className="font-cormorant text-[52px] font-light text-gold leading-none mb-2">
-                    {stat.value}
-                  </p>
+                  <AnimatedCounter value={stat.value} className="font-cormorant text-[52px] font-light text-gold leading-none mb-2 block" />
                   <p className="text-[11px] tracking-[2px] uppercase text-ivory/30 font-jost">
                     {stat.label}
                   </p>
