@@ -1,8 +1,10 @@
 'use client'
 
 import Image from 'next/image'
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import SectionReveal from '@/components/SectionReveal'
+import Lightbox from '@/components/Lightbox'
 import { useLanguage } from '@/lib/LanguageContext'
 import { LOOKBOOK_IMAGES } from '@/lib/i18n'
 
@@ -17,6 +19,9 @@ export default function LookbookPage() {
   const { t } = useLanguage()
   const { lookbook } = t
   const allImages = [...LOOKBOOK_IMAGES, ...EXTRA_IMAGES.map(id => ({ id, span: 'normal' as const }))]
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
+
+  const imageUrls = allImages.map(img => `https://images.unsplash.com/${img.id}?w=1200&q=80`)
 
   return (
     <>
@@ -63,6 +68,7 @@ export default function LookbookPage() {
                     aspectRatio: i % 5 === 0 ? '2/3' : '3/4',
                     gridRow: i % 7 === 0 ? 'span 2' : 'span 1',
                   }}
+                  onClick={() => setLightboxIndex(i)}
                 >
                   <Image
                     src={`https://images.unsplash.com/${img.id}?w=700&q=80`}
@@ -85,6 +91,16 @@ export default function LookbookPage() {
           </div>
         </div>
       </section>
+
+      {lightboxIndex !== null && (
+        <Lightbox
+          images={imageUrls}
+          index={lightboxIndex}
+          onClose={() => setLightboxIndex(null)}
+          onPrev={() => setLightboxIndex(i => i !== null ? (i - 1 + imageUrls.length) % imageUrls.length : 0)}
+          onNext={() => setLightboxIndex(i => i !== null ? (i + 1) % imageUrls.length : 0)}
+        />
+      )}
     </>
   )
 }
