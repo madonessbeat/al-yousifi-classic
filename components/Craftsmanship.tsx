@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import SectionReveal from './SectionReveal'
 import { useLanguage } from '@/lib/LanguageContext'
+import { LogoWatermark } from './AYCLogo'
 
 export default function Craftsmanship() {
   const { t } = useLanguage()
@@ -13,14 +14,20 @@ export default function Craftsmanship() {
       className="py-36 px-8 md:px-14 relative overflow-hidden"
       style={{ background: 'var(--rich)' }}
     >
-      {/* Decorative background text */}
-      <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 select-none pointer-events-none whitespace-nowrap font-cormorant font-light text-ivory/[0.018]"
-        style={{ fontSize: 'clamp(100px, 18vw, 240px)' }}
-        aria-hidden
-      >
-        Craft
-      </div>
+      {/* Crest watermark — centered, monumental */}
+      <LogoWatermark
+        variant="crest"
+        opacity={0.018}
+        color="white"
+        className="inset-0 flex items-center justify-center m-auto"
+        style={{
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          width: 'min(600px, 80vw)',
+          height: 'min(600px, 80vw)',
+        }}
+      />
 
       <div className="max-w-[1100px] mx-auto relative z-10">
         {/* Header */}
@@ -37,17 +44,13 @@ export default function Craftsmanship() {
           <SectionReveal delay={0.2}>
             <div
               className="mx-auto mt-8"
-              style={{
-                width: '60px',
-                height: '1px',
-                background: 'rgba(193,167,130,0.2)',
-              }}
+              style={{ width: '60px', height: '1px', background: 'rgba(193,167,130,0.2)' }}
             />
           </SectionReveal>
         </div>
 
         {/* Pillars */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-0 md:gap-0">
+        <div className="grid grid-cols-1 md:grid-cols-3">
           {craftsmanship.pillars.map((pillar, i) => (
             <SectionReveal key={i} delay={i * 0.15}>
               <motion.div
@@ -63,13 +66,13 @@ export default function Craftsmanship() {
               >
                 {/* Number */}
                 <p
-                  className="font-cormorant text-[56px] font-light leading-none mb-6 transition-all duration-500"
+                  className="font-cormorant text-[56px] font-light leading-none mb-6"
                   style={{ color: 'rgba(193,167,130,0.12)' }}
                 >
                   {pillar.number}
                 </p>
 
-                {/* Gold line */}
+                {/* Animated gold line */}
                 <motion.div
                   initial={{ width: 0 }}
                   whileInView={{ width: '40px' }}
@@ -79,19 +82,13 @@ export default function Craftsmanship() {
                   style={{ background: 'var(--gold)' }}
                 />
 
-                {/* Title */}
                 <h3
                   className="font-cormorant text-[26px] font-[400] text-ivory mb-4 group-hover:text-gold transition-colors duration-400"
                   dir="auto"
                 >
                   {pillar.title}
                 </h3>
-
-                {/* Body */}
-                <p
-                  className="text-[14px] leading-[1.9] text-ivory/45 font-light"
-                  dir="auto"
-                >
+                <p className="text-[14px] leading-[1.9] text-ivory/45 font-light" dir="auto">
                   {pillar.body}
                 </p>
               </motion.div>
@@ -103,10 +100,7 @@ export default function Craftsmanship() {
         <SectionReveal delay={0.5}>
           <div className="flex items-center justify-center gap-6 mt-20 opacity-20">
             <div className="h-px flex-1 max-w-[120px]" style={{ background: 'var(--gold)' }} />
-            <div
-              className="w-2 h-2 rounded-full border border-gold"
-              style={{ borderColor: 'var(--gold)' }}
-            />
+            <div className="w-2 h-2 rounded-full border" style={{ borderColor: 'var(--gold)' }} />
             <div className="h-px flex-1 max-w-[120px]" style={{ background: 'var(--gold)' }} />
           </div>
         </SectionReveal>

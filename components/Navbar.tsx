@@ -2,9 +2,9 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useLanguage } from '@/lib/LanguageContext'
+import AYCLogo from './AYCLogo'
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
@@ -43,25 +43,24 @@ export default function Navbar() {
             : 'py-5 px-8 md:px-14'
         }`}
       >
-        {/* Logo */}
-        <Link href="/" className="flex-shrink-0 relative z-10">
-          <Image
-            src="/logo.png"
-            alt="Al-Yousifi Classic"
-            width={160}
-            height={60}
-            priority
-            className="object-contain transition-all duration-500"
+        {/* Logo — simplified mark */}
+        <Link href="/" className="flex-shrink-0 relative z-10 group">
+          <AYCLogo
+            variant="simplified"
+            color="gold"
             style={{
-              height: scrolled ? '38px' : '50px',
+              height: scrolled ? '36px' : '48px',
               width: 'auto',
-              opacity: scrolled ? 0.95 : 0.88,
-              filter: 'drop-shadow(0 0 12px rgba(193,167,130,0.1))',
+              transition: 'all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+              filter: scrolled
+                ? 'brightness(0) invert(1) sepia(1) drop-shadow(0 0 12px rgba(193,167,130,0.25))'
+                : 'brightness(0) invert(1) sepia(1) drop-shadow(0 0 8px rgba(193,167,130,0.15))',
             }}
+            animate={false}
           />
         </Link>
 
-        {/* Desktop Nav Links */}
+        {/* Desktop Nav */}
         <div className="hidden lg:flex items-center gap-10">
           {navLinks.map(link => (
             <Link
@@ -75,26 +74,18 @@ export default function Navbar() {
           ))}
         </div>
 
-        {/* Right: Language Toggle + Hamburger */}
+        {/* Right side */}
         <div className="flex items-center gap-5">
-          {/* Language Toggle */}
+          {/* Language toggle */}
           <button
             onClick={toggle}
             className="hidden md:flex items-center border border-gold/20 text-[10px] tracking-[1px] overflow-hidden transition-all duration-300 hover:border-gold/40"
             aria-label="Toggle language"
           >
-            <span
-              className={`px-3.5 py-1.5 transition-all duration-300 font-jost ${
-                lang === 'ar' ? 'bg-gold/10 text-gold' : 'text-ivory/25'
-              }`}
-            >
+            <span className={`px-3.5 py-1.5 transition-all duration-300 font-jost ${lang === 'ar' ? 'bg-gold/10 text-gold' : 'text-ivory/25'}`}>
               AR
             </span>
-            <span
-              className={`px-3.5 py-1.5 transition-all duration-300 font-jost ${
-                lang === 'en' ? 'bg-gold/10 text-gold' : 'text-ivory/25'
-              }`}
-            >
+            <span className={`px-3.5 py-1.5 transition-all duration-300 font-jost ${lang === 'en' ? 'bg-gold/10 text-gold' : 'text-ivory/25'}`}>
               EN
             </span>
           </button>
@@ -105,8 +96,8 @@ export default function Navbar() {
             onClick={() => setMobileOpen(true)}
             aria-label="Open menu"
           >
-            <span className="block w-[22px] h-px bg-gold transition-all duration-300" />
-            <span className="block w-[14px] h-px bg-gold transition-all duration-300" />
+            <span className="block w-[22px] h-px bg-gold" />
+            <span className="block w-[14px] h-px bg-gold" />
           </button>
         </div>
       </motion.nav>
@@ -121,24 +112,19 @@ export default function Navbar() {
             transition={{ duration: 0.35 }}
             className="fixed inset-0 z-[999] bg-black/98 flex flex-col items-center justify-center"
           >
-            {/* Close */}
             <button
               onClick={() => setMobileOpen(false)}
               className="absolute top-6 right-7 text-gold text-2xl font-light leading-none"
-              aria-label="Close menu"
             >
               ✕
             </button>
 
-            {/* Logo in mobile menu */}
+            {/* Mobile logo — crest variant for impact */}
             <div className="absolute top-5 left-7">
-              <Image
-                src="/logo.png"
-                alt="Al-Yousifi Classic"
-                width={100}
-                height={40}
-                className="object-contain opacity-60"
-                style={{ height: '36px', width: 'auto' }}
+              <AYCLogo
+                variant="simplified"
+                color="gold"
+                style={{ height: '36px', width: 'auto', opacity: 0.7 }}
               />
             </div>
 
@@ -161,7 +147,6 @@ export default function Navbar() {
                 </motion.div>
               ))}
 
-              {/* Language toggle in mobile */}
               <motion.button
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -173,7 +158,18 @@ export default function Navbar() {
               </motion.button>
             </div>
 
-            {/* Bottom tagline */}
+            {/* Mobile menu — crest watermark */}
+            <div
+              aria-hidden
+              className="absolute inset-0 flex items-center justify-center pointer-events-none"
+            >
+              <AYCLogo
+                variant="crest"
+                color="gold"
+                style={{ width: '60vw', opacity: 0.03 }}
+              />
+            </div>
+
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}

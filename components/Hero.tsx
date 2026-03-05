@@ -1,9 +1,9 @@
 'use client'
 
-import Image from 'next/image'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { useLanguage } from '@/lib/LanguageContext'
+import AYCLogo, { StrokeWatermark } from './AYCLogo'
 
 const fadeUp = (delay: number) => ({
   initial: { opacity: 0, y: 18 },
@@ -16,49 +16,71 @@ export default function Hero() {
 
   return (
     <section className="relative h-screen flex flex-col items-center justify-center text-center overflow-hidden bg-black">
-      {/* Radial gold glow on background */}
-      <div
-        className="absolute inset-0 z-[1]"
+
+      {/* ── Layer 1: Stroke logo — large architectural watermark ── */}
+      <StrokeWatermark
+        opacity={0.035}
+        className="inset-0 flex items-center justify-center"
         style={{
-          background:
-            'radial-gradient(ellipse at 50% 45%, rgba(193,167,130,0.06) 0%, transparent 65%)',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          width: 'min(900px, 95vw)',
+          height: 'min(900px, 95vw)',
         }}
       />
 
-      {/* Content */}
+      {/* ── Layer 2: Radial gold ambient glow ── */}
+      <div
+        className="absolute inset-0 z-[1] pointer-events-none"
+        style={{
+          background:
+            'radial-gradient(ellipse 70% 60% at 50% 48%, rgba(193,167,130,0.07) 0%, transparent 65%)',
+        }}
+      />
+
+      {/* ── Layer 3: Bottom fade to black ── */}
+      <div
+        className="absolute bottom-0 left-0 right-0 h-48 z-[2] pointer-events-none"
+        style={{
+          background: 'linear-gradient(to top, #000 0%, transparent 100%)',
+        }}
+      />
+
+      {/* ── Content ── */}
       <div className="relative z-10 flex flex-col items-center px-6">
-        {/* Logo — Hero Display */}
+
+        {/* Bold logo — hero feature display */}
         <motion.div {...fadeUp(0.5)} className="mb-7">
           <div className="relative">
-            {/* Ambient glow behind logo */}
+            {/* Ambient glow ring */}
             <div
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] pointer-events-none"
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
               style={{
-                background:
-                  'radial-gradient(ellipse, rgba(193,167,130,0.05) 0%, transparent 70%)',
+                width: '140%',
+                height: '140%',
+                background: 'radial-gradient(ellipse, rgba(193,167,130,0.08) 0%, transparent 65%)',
               }}
             />
-            <Image
-              src="/logo.png"
-              alt="Al-Yousifi Classic"
-              width={480}
-              height={200}
-              priority
-              className="relative object-contain"
+            <AYCLogo
+              variant="bold"
+              color="gold"
+              glow
               style={{
-                width: 'min(480px, 72vw)',
+                width: 'min(420px, 68vw)',
                 height: 'auto',
-                filter: 'drop-shadow(0 0 60px rgba(193,167,130,0.18))',
+                filter:
+                  'brightness(0) invert(1) sepia(1) drop-shadow(0 0 60px rgba(193,167,130,0.22)) drop-shadow(0 0 120px rgba(193,167,130,0.08))',
               }}
             />
           </div>
         </motion.div>
 
-        {/* Ornamental Divider */}
+        {/* Ornamental divider */}
         <motion.div {...fadeUp(0.85)} className="flex items-center gap-4 mb-5">
-          <div className="w-8 h-px bg-gold/30" />
-          <div className="w-1.5 h-1.5 rounded-full bg-gold/40" />
-          <div className="w-8 h-px bg-gold/30" />
+          <div className="w-10 h-px" style={{ background: 'rgba(193,167,130,0.3)' }} />
+          <div className="w-1.5 h-1.5 rounded-full" style={{ background: 'rgba(193,167,130,0.45)' }} />
+          <div className="w-10 h-px" style={{ background: 'rgba(193,167,130,0.3)' }} />
         </motion.div>
 
         {/* Tagline */}
@@ -87,7 +109,7 @@ export default function Hero() {
         </motion.div>
       </div>
 
-      {/* Scroll Indicator */}
+      {/* Scroll indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -99,9 +121,7 @@ export default function Hero() {
         </span>
         <div
           className="w-px h-10 animate-scroll-pulse"
-          style={{
-            background: 'linear-gradient(to bottom, rgba(193,167,130,0.6), transparent)',
-          }}
+          style={{ background: 'linear-gradient(to bottom, rgba(193,167,130,0.6), transparent)' }}
         />
       </motion.div>
     </section>

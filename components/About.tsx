@@ -5,17 +5,28 @@ import Link from 'next/link'
 import { motion } from 'framer-motion'
 import SectionReveal from './SectionReveal'
 import { useLanguage } from '@/lib/LanguageContext'
+import { LogoWatermark } from './AYCLogo'
 
 export default function About() {
   const { t } = useLanguage()
   const { about } = t
 
   return (
-    <section className="py-36 px-8 md:px-14 overflow-hidden bg-black">
-      <div className="max-w-[1200px] mx-auto">
+    <section className="py-36 px-8 md:px-14 overflow-hidden bg-black relative">
+
+      {/* Crest watermark — top-right, very subtle */}
+      <LogoWatermark
+        variant="crest"
+        opacity={0.022}
+        color="white"
+        className="top-0 right-0"
+        style={{ width: '45vw', maxWidth: '520px', transform: 'translate(15%, -10%)' }}
+      />
+
+      <div className="max-w-[1200px] mx-auto relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center">
 
-          {/* Image Column */}
+          {/* Image */}
           <SectionReveal direction="left">
             <div
               className="relative overflow-hidden group"
@@ -27,19 +38,12 @@ export default function About() {
                 width={600}
                 height={800}
                 className="w-full object-cover transition-transform duration-[6000ms] ease-out group-hover:scale-[1.04]"
-                style={{
-                  aspectRatio: '3/4',
-                  filter: 'brightness(0.75) saturate(0.9)',
-                }}
+                style={{ aspectRatio: '3/4', filter: 'brightness(0.75) saturate(0.9)' }}
               />
-              {/* Bottom gradient */}
               <div
                 className="absolute inset-0 pointer-events-none"
-                style={{
-                  background: 'linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.5))',
-                }}
+                style={{ background: 'linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.5))' }}
               />
-              {/* Gold accent line */}
               <motion.div
                 initial={{ scaleX: 0 }}
                 whileInView={{ scaleX: 1 }}
@@ -51,28 +55,22 @@ export default function About() {
             </div>
           </SectionReveal>
 
-          {/* Text Column */}
+          {/* Text */}
           <div className="flex flex-col">
             <SectionReveal delay={0.1}>
               <p className="section-label mb-4">{about.label}</p>
             </SectionReveal>
-
             <SectionReveal delay={0.2}>
               <h2 className="section-title mb-0 text-ivory">
                 {about.title}{' '}
                 <em className="text-gold not-italic">{about.titleAccent}</em>
               </h2>
             </SectionReveal>
-
             <SectionReveal delay={0.3}>
               <div className="gold-line my-7" />
             </SectionReveal>
-
             <SectionReveal delay={0.35}>
-              <p
-                className="text-[15px] leading-[2] text-ivory/55 max-w-[540px] font-light"
-                dir="auto"
-              >
+              <p className="text-[15px] leading-[2] text-ivory/55 max-w-[540px] font-light" dir="auto">
                 {about.body}
               </p>
             </SectionReveal>
@@ -82,9 +80,7 @@ export default function About() {
               <div className="flex gap-10 mt-12 flex-wrap">
                 {[about.stat1, about.stat2, about.stat3].map((stat, i) => (
                   <div key={i}>
-                    <p
-                      className="font-cormorant text-[40px] text-gold font-light leading-none mb-1"
-                    >
+                    <p className="font-cormorant text-[40px] text-gold font-light leading-none mb-1">
                       {stat.value}
                     </p>
                     <p className="text-[10px] tracking-[2px] uppercase text-ivory/25 font-jost">
