@@ -32,9 +32,17 @@ export default function Lightbox({ images, index, onClose, onPrev, onNext }: Lig
   // Tab trap
   useEffect(() => {
     const previouslyFocused = document.activeElement as HTMLElement | null
-
     const dialog = dialogRef.current
-    if (!dialog) return
+
+    const restoreFocus = () => {
+      if (previouslyFocused && document.contains(previouslyFocused)) {
+        previouslyFocused.focus()
+      }
+    }
+
+    if (!dialog) {
+      return restoreFocus
+    }
 
     const focusableSelectors = [
       'button:not([disabled])',
@@ -74,7 +82,7 @@ export default function Lightbox({ images, index, onClose, onPrev, onNext }: Lig
     document.addEventListener('keydown', handleTab)
     return () => {
       document.removeEventListener('keydown', handleTab)
-      previouslyFocused?.focus()
+      restoreFocus()
     }
   }, [])
 
