@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { useLanguage } from '@/lib/LanguageContext'
 import AYCLogo, { StrokeWatermark } from './AYCLogo'
+import MagneticButton from './MagneticButton'
 
 const fadeUp = (delay: number) => ({
   initial: { opacity: 0, y: 18 },
@@ -103,9 +104,11 @@ export default function Hero() {
 
         {/* CTA */}
         <motion.div {...fadeUp(1.5)}>
-          <Link href="/collections" className="btn-outline-gold">
-            {t.hero.cta}
-          </Link>
+          <MagneticButton>
+            <Link href="/collections" className="btn-outline-gold">
+              {t.hero.cta}
+            </Link>
+          </MagneticButton>
         </motion.div>
       </div>
 

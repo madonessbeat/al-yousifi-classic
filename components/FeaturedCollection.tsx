@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { motion } from 'framer-motion'
 import SectionReveal from './SectionReveal'
 import { useLanguage } from '@/lib/LanguageContext'
+import MagneticButton from './MagneticButton'
 
 export default function FeaturedCollection() {
   const { t } = useLanguage()
@@ -123,9 +124,11 @@ export default function FeaturedCollection() {
 
             <SectionReveal delay={0.6}>
               <div className="mt-10">
-                <Link href="/collections" className="btn-outline-gold inline-block">
-                  {featured.cta}
-                </Link>
+                <MagneticButton>
+                  <Link href="/collections" className="btn-outline-gold inline-block">
+                    {featured.cta}
+                  </Link>
+                </MagneticButton>
               </div>
             </SectionReveal>
           </div>

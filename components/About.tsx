@@ -7,6 +7,7 @@ import SectionReveal from './SectionReveal'
 import { useLanguage } from '@/lib/LanguageContext'
 import { LogoWatermark } from './AYCLogo'
 import AnimatedCounter from './AnimatedCounter'
+import MagneticButton from './MagneticButton'
 
 export default function About() {
   const { t } = useLanguage()
@@ -110,9 +111,11 @@ export default function About() {
 
             <SectionReveal delay={0.55}>
               <div className="mt-10">
-                <Link href="/about" className="btn-outline-gold inline-block">
-                  {about.cta}
-                </Link>
+                <MagneticButton>
+                  <Link href="/about" className="btn-outline-gold inline-block">
+                    {about.cta}
+                  </Link>
+                </MagneticButton>
               </div>
             </SectionReveal>
           </div>
