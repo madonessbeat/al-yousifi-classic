@@ -5,6 +5,7 @@ import { LanguageProvider } from '@/lib/LanguageContext'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import WhatsAppButton from '@/components/WhatsAppButton'
+import InstallPrompt from '@/components/InstallPrompt'
 
 const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
@@ -29,6 +30,7 @@ const notoNaskh = Noto_Naskh_Arabic({
 })
 
 export const metadata: Metadata = {
+  manifest: '/manifest.json',
   title: 'Al-Yousifi Classic | اليوسفي كلاسيك',
   description:
     "Sudan's premier men's luxury fashion boutique. Formal wear, casual collections, footwear, watches, and accessories. Located in Khartoum.",
@@ -47,12 +49,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       dir="rtl"
       className={`${cormorant.variable} ${jost.variable} ${notoNaskh.variable}`}
     >
+      <head>
+        <link rel="apple-touch-icon" href="/icon-192.png" />
+        <meta name="theme-color" content="#000000" />
+      </head>
       <body>
         <LanguageProvider>
           <Navbar />
           <main>{children}</main>
           <Footer />
           <WhatsAppButton />
+          <InstallPrompt />
         </LanguageProvider>
       </body>
     </html>
