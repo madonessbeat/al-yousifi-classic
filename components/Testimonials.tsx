@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import SectionReveal from './SectionReveal'
 import { useLanguage } from '@/lib/LanguageContext'
@@ -10,9 +10,12 @@ export default function Testimonials() {
   const { testimonials } = t
   const [current, setCurrent] = useState(0)
 
-  const handleDot = (index: number) => {
-    setCurrent(index)
-  }
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrent(c => (c + 1) % testimonials.items.length)
+    }, 5000)
+    return () => clearInterval(timer)
+  }, [testimonials.items.length])
 
   const item = testimonials.items[current]
 
@@ -86,26 +89,30 @@ export default function Testimonials() {
           </motion.div>
         </AnimatePresence>
 
-        {/* Dots */}
+        {/* Arrow + counter navigation */}
         <SectionReveal delay={0.3}>
-          <div className="flex items-center justify-center gap-2.5 mt-10">
-            {testimonials.items.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => handleDot(i)}
-                aria-label={`Testimonial ${i + 1}`}
-                className="transition-all duration-400"
-                style={{
-                  width: i === current ? '28px' : '6px',
-                  height: '6px',
-                  borderRadius: i === current ? '3px' : '50%',
-                  background:
-                    i === current
-                      ? 'var(--gold)'
-                      : 'rgba(193,167,130,0.18)',
-                }}
-              />
-            ))}
+          <div className="flex items-center justify-center gap-5 mt-10">
+            <button
+              onClick={() => setCurrent(c => (c - 1 + testimonials.items.length) % testimonials.items.length)}
+              className="text-gold/30 hover:text-gold transition-colors duration-300"
+              aria-label="Previous testimonial"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <polyline points="15 18 9 12 15 6"/>
+              </svg>
+            </button>
+            <p className="text-[9px] tracking-[4px] font-jost text-ivory/30">
+              {String(current + 1).padStart(2, '0')} / {String(testimonials.items.length).padStart(2, '0')}
+            </p>
+            <button
+              onClick={() => setCurrent(c => (c + 1) % testimonials.items.length)}
+              className="text-gold/30 hover:text-gold transition-colors duration-300"
+              aria-label="Next testimonial"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <polyline points="9 18 15 12 9 6"/>
+              </svg>
+            </button>
           </div>
         </SectionReveal>
       </div>
