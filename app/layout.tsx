@@ -33,18 +33,58 @@ const notoNaskh = Noto_Naskh_Arabic({
 
 export const metadata: Metadata = {
   manifest: '/manifest.json',
-  title: 'Al-Yousifi Classic | اليوسفي كلاسيك',
+  metadataBase: new URL('https://al-yousifi-classic.vercel.app'),
+  title: {
+    template: '%s | Al-Yousifi Classic',
+    default: 'Al-Yousifi Classic — Luxury Menswear, Khartoum',
+  },
   description:
-    "Sudan's premier men's luxury fashion boutique. Formal wear, casual collections, footwear, watches, and accessories. Located in Khartoum.",
+    'Discover Al-Yousifi Classic — luxury menswear crafted in Khartoum, Sudan. Explore our collections of bespoke suits, thobes, and accessories.',
   keywords: 'Al-Yousifi Classic, luxury fashion Sudan, men boutique Khartoum, اليوسفي كلاسيك',
   openGraph: {
-    title: 'Al-Yousifi Classic | اليوسفي كلاسيك',
-    description: "Sudan's premier men's luxury fashion boutique — Khartoum",
     type: 'website',
+    locale: 'ar_SD',
+    alternateLocale: 'en_US',
+    siteName: 'Al-Yousifi Classic',
+    title: 'Al-Yousifi Classic — Luxury Menswear',
+    description:
+      'Discover Al-Yousifi Classic — luxury menswear crafted in Khartoum, Sudan. Explore our collections of bespoke suits, thobes, and accessories.',
+    images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'Al-Yousifi Classic' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Al-Yousifi Classic',
+    description:
+      'Discover Al-Yousifi Classic — luxury menswear crafted in Khartoum, Sudan. Explore our collections of bespoke suits, thobes, and accessories.',
+    images: ['/og-image.jpg'],
   },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'ClothingStore',
+    name: 'Al-Yousifi Classic',
+    url: 'https://al-yousifi-classic.vercel.app',
+    telephone: '+249912302693',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'شارع الكلاكلة',
+      addressLocality: 'الخرطوم',
+      addressCountry: 'SD',
+    },
+    openingHoursSpecification: [
+      {
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: ['Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday'],
+        opens: '09:00',
+        closes: '22:00',
+      },
+    ],
+    priceRange: '$$$$',
+    image: '/og-image.jpg',
+  }
+
   return (
     <html
       lang="ar"
@@ -54,6 +94,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <link rel="apple-touch-icon" href="/icon-192.png" />
         <meta name="theme-color" content="#000000" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
       </head>
       <body>
         <a href="#main-content" className="skip-to-content">Skip to content</a>
