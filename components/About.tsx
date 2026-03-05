@@ -8,6 +8,7 @@ import { useLanguage } from '@/lib/LanguageContext'
 import { LogoWatermark } from './AYCLogo'
 import AnimatedCounter from './AnimatedCounter'
 import MagneticButton from './MagneticButton'
+import BrandMarquee from './BrandMarquee'
 
 export default function About() {
   const { t } = useLanguage()
@@ -107,6 +108,10 @@ export default function About() {
                   </div>
                 ))}
               </div>
+            </SectionReveal>
+
+            <SectionReveal delay={0.5}>
+              <BrandMarquee className="mt-8 -mx-8 md:-mx-14" />
             </SectionReveal>
 
             <SectionReveal delay={0.55}>
