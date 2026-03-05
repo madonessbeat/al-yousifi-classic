@@ -8,7 +8,7 @@ export default function CustomCursor() {
   const cursorY = useMotionValue(-100)
   const ringX = useSpring(cursorX, { stiffness: 150, damping: 18 })
   const ringY = useSpring(cursorY, { stiffness: 150, damping: 18 })
-  const [isFinePonter, setIsFinePointer] = useState(false)
+  const [isFinePointer, setIsFinePointer] = useState(false)
 
   useEffect(() => {
     const mq = window.matchMedia('(pointer: fine)')
@@ -34,7 +34,7 @@ export default function CustomCursor() {
     }
   }, [cursorX, cursorY])
 
-  if (!isFinePonter) return null
+  if (!isFinePointer) return null
 
   return (
     <>
